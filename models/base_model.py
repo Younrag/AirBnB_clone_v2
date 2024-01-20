@@ -12,7 +12,6 @@ Base = declarative_base()
 
 class BaseModel:
     """This class will defines all common attributes/methods
-    for other classes
     """
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
@@ -20,13 +19,6 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
-        Args:
-            args: it won't be used
-            kwargs: arguments for the constructor of the BaseModel
-        Attributes:
-            id: unique id generated
-            created_at: creation date
-            updated_at: updated date
         """
         if kwargs:
             for key, value in kwargs.items():
@@ -47,7 +39,7 @@ class BaseModel:
     def __str__(self):
         """returns a string
         Return:
-            returns a string of class name, id, and dictionary
+            returns name, id, and dictionary
         """
         return "[{}] ({}) {}".format(
             type(self).__name__, self.id, self.__dict__)
@@ -66,8 +58,6 @@ class BaseModel:
 
     def to_dict(self):
         """creates dictionary of the class  and returns
-        Return:
-            returns a dictionary of all the key values in __dict__
         """
         my_dict = dict(self.__dict__)
         my_dict["__class__"] = str(type(self).__name__)
